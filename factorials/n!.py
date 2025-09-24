@@ -181,9 +181,39 @@ def factorial_via_primes_with_mul(input_n, max_full_digits=200_000, significant_
     
     return (scientific_notation, final_time, actual_factorial, metadata)
 
+def log10_fact_stirling_mpfr(test_n, prec_bits=200):
+    ctx = gmpy2.get_context()
+    ctx.precision = prec_bits
+
+    mpn = gmpy2.mpfr(test_n)
+    ln10 = gmpy2.log(gmpy2.mpfr(10))
+
+    ln_n = gmpy2.log(mpn)
+    term_main = mpn * ln_n - mpn
+    term_half = gmpy2.log(2 * gmpy2.const_pi() * mpn) / 2
+    inv_n = 1 / mpn
+    c12 = gmpy2.mpfr(1) / (12) * inv_n
+    c360 = - gmpy2.mpfr(1) / 360 * inv_n**3
+    c1260 = gmpy2.mpfr(1) / 1260 * inv_n**5
+
+    ln_fact = term_main + term_half + c12 + c360 + c1260
+    # convert to log10
+    log10_fact = ln_fact / ln10
+    return log10_fact  # mpfr
+
+def percent_error_from_logs(L_est_float, L_ref_mpfr):
+    """Return percent error given L_est (float) and L_ref (mpfr)."""
+    L_ref = float(L_ref_mpfr)        # small rounding here, but enough to compute delta
+    delta = L_est_float - L_ref
+    # exact percent:
+    pct = (10**delta - 1.0) * 100.0
+    # approximate percent:
+    approx_pct = (gmpy2.log(gmpy2.mpfr(10)) * gmpy2.mpfr(delta) * 100)
+    return pct, float(approx_pct)
+
 # Main execution
 if __name__ == "__main__":
-    test_n = 10**7  # can adjust this
+    test_n = 10**6  # can adjust this
     result_sci, time_taken, full_factorial, info_dict = factorial_via_primes_with_mul(test_n, max_full_digits=200_000, significant_digits=12)
     
     print(f"\nn = {test_n}")
@@ -192,3 +222,11 @@ if __name__ == "__main__":
     print(f"Built full integer: {info_dict['built_full']}")
     print(f"Scientific notation (~{12} sig digits): {result_sci}")
     print(f"Elapsed time: {time_taken:.6f} seconds")
+
+    ref = log10_fact_stirling_mpfr(test_n, prec_bits=300)
+    # print("Reference log10(n!) (mpfr):", ref)
+    L_est = info_dict['estimated_log10']
+    pct_exact, pct_approx = percent_error_from_logs(L_est, ref)
+    # print("Delta (L_est - L_ref) =", float(L_est - float(ref)))
+    print("Percent error (exact formula):", pct_exact)
+    # print("Percent error (linear approx):", pct_approx)
