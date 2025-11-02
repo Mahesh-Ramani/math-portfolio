@@ -189,7 +189,6 @@ def _hybrid_component_reduction(components, switch_to_disk_threshold, tmp_dir):
     current_layer = list(components)
 
     while len(current_layer) > 1:
-        # Check if we have reached the threshold to switch to disk
         if len(current_layer) <= switch_to_disk_threshold:
             print(f"\nComponent count is {len(current_layer)} (<= threshold of {switch_to_disk_threshold}).")
             print("Switching to disk-based multiplication for final combination.")
@@ -213,7 +212,6 @@ def _hybrid_component_reduction(components, switch_to_disk_threshold, tmp_dir):
         current_layer = next_layer
         gc.collect()
 
-    # If the loop finishes, it means the number of components was already 1 or 0
     if not current_layer:
         return gmpy2.mpz(1)
     return current_layer[0]
@@ -222,12 +220,6 @@ def reconstruct_from_factorization(fpath, chunk_size=100000, switch_to_disk_thre
     """
     Reconstructs an integer from its prime factorization file.
     
-    Args:
-        fpath (str): Path to the factorization file.
-        chunk_size (int): Number of primes to process in-memory at a time.
-        switch_to_disk_threshold (int): When the number of components to be multiplied
-                                        drops to this number, switch from in-memory
-                                        to disk-based multiplication to save RAM.
     """
     start = perf_counter()
     temp_files = {}
@@ -247,13 +239,12 @@ def reconstruct_from_factorization(fpath, chunk_size=100000, switch_to_disk_thre
             print(f"  Completed exponent {exp}")
             sys.stdout.flush()
 
-        # --- MODIFIED STEP 3: Use the new hybrid combination strategy ---
-        print("\nComputing final product using hybrid memory/disk strategy...")
+
+        print("\nComputing final product...")
         sys.stdout.flush()
         
         final_number = None
-        # The hybrid function needs a temporary directory in case it needs to switch.
-        # This is managed safely with a context manager.
+
         with tempfile.TemporaryDirectory(prefix="catalan_hybrid_") as tmp_dir:
             final_number = _hybrid_component_reduction(components, switch_to_disk_threshold, tmp_dir)
         
@@ -279,18 +270,15 @@ def reconstruct_from_factorization(fpath, chunk_size=100000, switch_to_disk_thre
 
 
 if __name__ == "__main__":
-    # --- CONFIGURATION ---
+    # ------
     OUTPUT_FORMAT = 'binary'
-    fpath = "C:\Coding\catalan_2348957904_factorization.txt"
+    fpath = "C:\Coding\catalan_2050572903_factorization.txt"
     # -------------------
 
     try:
         print(f"Starting reconstruction at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         sys.stdout.flush()
        
-        # Call with the new, clearer parameter name. When the number of components
-        # to be multiplied drops to 10, the program will automatically switch
-        # to the safer disk-based method.
         catalan, time_taken, info = reconstruct_from_factorization(fpath, chunk_size=100000, switch_to_disk_threshold=3)
        
         print("\n--- Computation Complete ---")
@@ -327,4 +315,5 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"An error occurred during reconstruction: {e}")
         import traceback
+
         traceback.print_exc()
