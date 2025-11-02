@@ -10,12 +10,7 @@ import tempfile
 import uuid
 from contextlib import ExitStack
 
-# --- Core Algorithmic Components ---
-
 def pairwise_product_reduce(items):
-    """
-    Efficiently computes the product of a list of numbers using a pairwise strategy.
-    """
     if not items:
         return gmpy2.mpz(1)
     
@@ -25,41 +20,27 @@ def pairwise_product_reduce(items):
         it = iter(layer)
         for a in it:
             try:
-                # Multiply pairs of items
                 b = next(it)
                 next_layer.append(gmpy2.mul(a, b))
             except StopIteration:
-                # If there's an odd one out, carry it to the next layer
                 next_layer.append(a)
                 break
         layer = next_layer
     return layer[0]
 
 def pow_gmp(base, exp):
-    """Custom power function using gmpy2's overloaded operator."""
     return gmpy2.mpz(base) ** int(exp)
 
-
-# --- File I/O for Large Numbers ---
-
 def write_mpz_to_file(n, path):
-    """Writes a gmpy2.mpz integer to a file in a compact binary format."""
     with open(path, 'wb') as f:
         f.write(gmpy2.to_binary(n))
 
 def read_mpz_from_file(path):
-    """Reads a gmpy2.mpz integer from a binary file."""
     with open(path, 'rb') as f:
         return gmpy2.from_binary(f.read())
 
-# --- Main Reconstruction Logic ---
-
-def _split_factorization_by_exponent(fpath):
-    """
-    First pass: Splits the main factorization file into temporary files, one for each exponent.
-    Returns a dictionary mapping each exponent to its corresponding temp file path.
-    """
-    print("Pass 1: Splitting factorization file by exponent...")
+def split_factorization_by_exponent(fpath):
+    print("Splitting factorization file by exponent...")
     sys.stdout.flush()
 
     exp_counts = defaultdict(int)
@@ -94,11 +75,7 @@ def _split_factorization_by_exponent(fpath):
     sys.stdout.flush()
     return temp_files, exp_counts
 
-def _process_exponent_file(exp, path, chunk_size):
-    """
-    Second pass: Processes a single exponent's temp file.
-    It reads all primes, calculates their product, and raises it to the exponent.
-    """
+def process_exponent_file(exp, path, chunk_size):
     partial_products = []
     chunk = []
     
@@ -129,11 +106,7 @@ def _process_exponent_file(exp, path, chunk_size):
         sys.stdout.flush()
         return pow_gmp(total_product, exp)
 
-def _combine_components_on_disk(components, tmp_dir):
-    """
-    Writes large number components to disk and multiplies them pairwise
-    to keep memory usage minimal.
-    """
+def combine_components_on_disk(components, tmp_dir):
     disk_paths = []
     try:
         for i, comp in enumerate(components):
@@ -179,13 +152,7 @@ def _combine_components_on_disk(components, tmp_dir):
             except OSError:
                 pass
 
-
-def _hybrid_component_reduction(components, switch_to_disk_threshold, tmp_dir):
-    """
-    Combines components using a hybrid memory/disk strategy.
-    Reduces components in-memory until their count reaches the threshold,
-    then switches to a disk-based method for the final, largest multiplications.
-    """
+def hybrid_component_reduction(components, switch_to_disk_threshold, tmp_dir):
     current_layer = list(components)
 
     while len(current_layer) > 1:
@@ -193,10 +160,8 @@ def _hybrid_component_reduction(components, switch_to_disk_threshold, tmp_dir):
             print(f"\nComponent count is {len(current_layer)} (<= threshold of {switch_to_disk_threshold}).")
             print("Switching to disk-based multiplication for final combination.")
             sys.stdout.flush()
-            # Hand off the remaining, very large components to the disk-based function
-            return _combine_components_on_disk(current_layer, tmp_dir)
+            return combine_components_on_disk(current_layer, tmp_dir)
 
-        # --- Perform one round of in-memory pairwise multiplication ---
         print(f"  In-memory multiply round: {len(current_layer)} components -> {((len(current_layer) + 1) // 2)} components")
         sys.stdout.flush()
         
@@ -217,15 +182,11 @@ def _hybrid_component_reduction(components, switch_to_disk_threshold, tmp_dir):
     return current_layer[0]
 
 def reconstruct_from_factorization(fpath, chunk_size=100000, switch_to_disk_threshold=10):
-    """
-    Reconstructs an integer from its prime factorization file.
-    
-    """
     start = perf_counter()
     temp_files = {}
     
     try:
-        temp_files, exp_counts = _split_factorization_by_exponent(fpath)
+        temp_files, exp_counts = split_factorization_by_exponent(fpath)
 
         components = []
         for i, (exp, path) in enumerate(sorted(temp_files.items())):
@@ -233,20 +194,19 @@ def reconstruct_from_factorization(fpath, chunk_size=100000, switch_to_disk_thre
             print(f"\nProcessing exponent {exp} ({i+1}/{len(temp_files)}): {count:,} primes...")
             sys.stdout.flush()
             
-            component = _process_exponent_file(exp, path, chunk_size)
+            component = process_exponent_file(exp, path, chunk_size)
             components.append(component)
             gc.collect()
             print(f"  Completed exponent {exp}")
             sys.stdout.flush()
-
 
         print("\nComputing final product...")
         sys.stdout.flush()
         
         final_number = None
 
-        with tempfile.TemporaryDirectory(prefix="catalan_hybrid_") as tmp_dir:
-            final_number = _hybrid_component_reduction(components, switch_to_disk_threshold, tmp_dir)
+        with tempfile.TemporaryDirectory(prefix="catalan_") as tmp_dir:
+            final_number = hybrid_component_reduction(components, switch_to_disk_threshold, tmp_dir)
         
         elapsed = perf_counter() - start
         meta = {
@@ -268,12 +228,9 @@ def reconstruct_from_factorization(fpath, chunk_size=100000, switch_to_disk_thre
         print("Cleanup complete.")
         sys.stdout.flush()
 
-
 if __name__ == "__main__":
-    # ------
     OUTPUT_FORMAT = 'binary'
     fpath = "C:\Coding\catalan_2050572903_factorization.txt"
-    # -------------------
 
     try:
         print(f"Starting reconstruction at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -315,5 +272,4 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"An error occurred during reconstruction: {e}")
         import traceback
-
         traceback.print_exc()
