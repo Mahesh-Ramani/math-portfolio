@@ -230,7 +230,7 @@ def reconstruct_from_factorization(fpath, chunk_size=100000, switch_to_disk_thre
 
 if __name__ == "__main__":
     OUTPUT_FORMAT = 'binary'
-    fpath = "%YOURPATH%\catalan_2050572903_factorization.txt"
+    fpath = "%YOURPATH%\catalan_2050572903_factorization.txt" #copy path from the factorization you get from catalan.py
 
     try:
         print(f"Starting reconstruction at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -273,4 +273,5 @@ if __name__ == "__main__":
         print(f"An error occurred during reconstruction: {e}")
         import traceback
         traceback.print_exc()
+
 
