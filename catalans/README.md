@@ -1,4 +1,4 @@
-# Exact Computation of Catalan Numbers at Record-Breaking Scale
+# Exact Computation of Large Catalan Numbers
 
 This repository contains the implementation of a two-phase algorithm for computing extremely large Catalan numbers, as described in the paper "Exact Computation of the Catalan Number C(2,050,572,903)" by me :). The method avoids direct computation of enormous factorials by operating on prime-exponent data.
 
