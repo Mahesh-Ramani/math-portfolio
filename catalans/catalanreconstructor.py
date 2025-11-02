@@ -230,7 +230,7 @@ def reconstruct_from_factorization(fpath, chunk_size=100000, switch_to_disk_thre
 
 if __name__ == "__main__":
     OUTPUT_FORMAT = 'binary'
-    fpath = "C:\Coding\catalan_2050572903_factorization.txt"
+    fpath = "%YOURPATH%\catalan_2050572903_factorization.txt"
 
     try:
         print(f"Starting reconstruction at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -264,7 +264,7 @@ if __name__ == "__main__":
             
             file_hash = hashlib.sha256(binary_data).hexdigest()
             print(f"  Wrote {len(binary_data):,} bytes.")
-            print(f"  SHA-26 Hash: {file_hash}")
+            print(f"  SHA-256 Hash: {file_hash}")
             print("Binary write complete.")
 
     except FileNotFoundError:
@@ -273,3 +273,4 @@ if __name__ == "__main__":
         print(f"An error occurred during reconstruction: {e}")
         import traceback
         traceback.print_exc()
+
