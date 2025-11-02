@@ -199,7 +199,7 @@ def catalan_prime_factorization(n, significant_digits=12, out_dir=".", num_worke
     return (sci_not, elapsed, None, meta)
 
 if __name__ == "__main__":
-    test_n = 2348957904 #can be adjusted
+    test_n = 2050572903 #can be adjusted
     result, time_taken, _, info = catalan_prime_factorization(test_n, significant_digits=12, out_dir=".")
     
     print(f"\nn = {test_n}")
@@ -212,5 +212,6 @@ if __name__ == "__main__":
     print(f"Primes up to 2n: {info['primes_count']:,}")
     print(f"Scientific notation (~12 sig digits): {result}")
     print(f"Elapsed time: {time_taken:.6f} seconds")
+
 
 
