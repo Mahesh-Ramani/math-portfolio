@@ -19,6 +19,8 @@ The paper details the computation of C(2,050,572,903), a number with over 1.2 bi
 You can access the data via the following link:
 [Catalan C(2,050,572,903) Computation Results](https://drive.google.com/drive/folders/1JIIeN6xsTsAl4cGJ5pPutKi7shUOJAd5?usp=drive_link)
 
+SHA-256 Checksum: dac68f4ee35db8e9400e68bd6140e6cbccec6fb8ce81059318400e2c44e45ae4
+
 ## Code
 
 This project includes two primary Python scripts:
