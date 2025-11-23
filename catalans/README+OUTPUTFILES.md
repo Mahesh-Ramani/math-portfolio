@@ -1,6 +1,6 @@
 # Exact Computation of Large Catalan Numbers
 
-This repository contains the implementation of a two-phase algorithm for computing extremely large Catalan numbers, as described in the paper "Exact Computation of the Catalan Number C(2,050,572,903)" by me :). The method avoids direct computation of enormous factorials by operating on prime-exponent data.
+This repository contains the implementation of a two-phase algorithm for computing extremely large Catalan numbers, as described in the paper "Exact Computation of the Catalan Number C(2,050,572,903)" by Mahesh Ramani. The method avoids direct computation of enormous factorials by operating on prime-exponent data.
 
 ## Summary
 
@@ -20,6 +20,7 @@ You can access the data via the following link:
 [Catalan C(2,050,572,903) Computation Results](https://drive.google.com/drive/folders/1JIIeN6xsTsAl4cGJ5pPutKi7shUOJAd5?usp=drive_link)
 
 SHA-256 Checksum: dac68f4ee35db8e9400e68bd6140e6cbccec6fb8ce81059318400e2c44e45ae4
+
 
 ## Code
 
