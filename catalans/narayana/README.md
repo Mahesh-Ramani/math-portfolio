@@ -1,4 +1,4 @@
-# Narayana Numbers Generator
+# Triangle of Narayana Numbers Generator
 
 ### Overview
 This script is a lightweight adaptation of the algorithm developed for my "Exact Computation of the Catalan Number" paper. It serves as a practical demonstration of the modular architecture discussed in Section 6.3 of that research.
