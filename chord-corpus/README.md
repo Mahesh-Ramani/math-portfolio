@@ -1,6 +1,6 @@
 # A Comprehensive Corpus of Biomechanically Constrained Piano Chords
 
-[**See the Dataset**]: [https://huggingface.co/datasets/MRamani/manus-piano-chord-corpus]
+See the Dataset: https://huggingface.co/datasets/MRamani/manus-piano-chord-corpus
 
 ## Abstract
 
