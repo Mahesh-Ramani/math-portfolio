@@ -1,7 +1,3 @@
-Here is the updated `README.md`. I have removed the emojis, stripped out unnecessary formatting, and integrated the specific methodological details and column names from the second document to match the formal tone of the academic paper.
-
-***
-
 # A Comprehensive Corpus of Biomechanically Constrained Piano Chords
 
 [**Download the Dataset (Google Drive)**](INSERT_GOOGLE_DRIVE_LINK_HERE)
