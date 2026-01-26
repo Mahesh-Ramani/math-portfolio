@@ -1,0 +1,130 @@
+================================================================================
+Satellite Network Simulation - Run Started at 20260126_171627
+================================================================================
+Output Directory: C:\Coding\aero\Results
+Log File: C:\Coding\aero\Results\run_log_20260126_171627.txt
+
+Simulation Configuration:
+  N_SATS: 10000
+  PLANES: 100
+  PHASING: 25
+  INC_DEG: 53.0
+  ALT_KM: 550.0
+  D_MAX_KM: 1000.0
+  MAX_DEGREE: 4
+  ATMOSPHERE_KM: 80.0
+  PHASE_TRANSITION_MAX_N: 10000
+  PHASE_TRANSITION_STEP: 150
+  SAMPLE_PATH_FRACTION: 0.7
+  MAX_WORKERS: 10
+================================================================================
+
+Running Phase Transition (N=50 to 10000)...
+  Processed N=50 | Walker GCC=0.02
+  Processed N=200 | Walker GCC=0.02
+  Processed N=350 | Walker GCC=0.26
+  Processed N=500 | Walker GCC=0.38
+  Processed N=650 | Walker GCC=0.22
+  Processed N=800 | Walker GCC=0.90
+  Processed N=950 | Walker GCC=0.88
+  Processed N=1100 | Walker GCC=0.97
+  Processed N=1250 | Walker GCC=0.96
+  Processed N=1400 | Walker GCC=1.00
+  Processed N=1550 | Walker GCC=1.00
+  Processed N=1700 | Walker GCC=1.00
+  Processed N=1850 | Walker GCC=1.00
+  Processed N=2000 | Walker GCC=1.00
+  Processed N=2150 | Walker GCC=1.00
+  Processed N=2300 | Walker GCC=1.00
+  Processed N=2450 | Walker GCC=1.00
+  Processed N=2600 | Walker GCC=1.00
+  Processed N=2750 | Walker GCC=1.00
+  Processed N=2900 | Walker GCC=1.00
+  Processed N=3050 | Walker GCC=1.00
+  Processed N=3200 | Walker GCC=1.00
+  Processed N=3350 | Walker GCC=1.00
+  Processed N=3500 | Walker GCC=1.00
+  Processed N=3650 | Walker GCC=1.00
+  Processed N=3800 | Walker GCC=1.00
+  Processed N=3950 | Walker GCC=1.00
+  Processed N=4250 | Walker GCC=1.00
+  Processed N=4100 | Walker GCC=1.00
+  Processed N=4400 | Walker GCC=1.00
+  Processed N=4550 | Walker GCC=1.00
+  Processed N=4700 | Walker GCC=1.00
+  Processed N=4850 | Walker GCC=1.00
+  Processed N=5000 | Walker GCC=1.00
+  Processed N=5150 | Walker GCC=1.00
+  Processed N=5300 | Walker GCC=1.00
+  Processed N=5450 | Walker GCC=1.00
+  Processed N=5600 | Walker GCC=1.00
+  Processed N=5750 | Walker GCC=1.00
+  Processed N=5900 | Walker GCC=1.00
+  Processed N=6050 | Walker GCC=1.00
+  Processed N=6200 | Walker GCC=1.00
+  Processed N=6350 | Walker GCC=1.00
+  Processed N=6500 | Walker GCC=1.00
+  Processed N=6650 | Walker GCC=1.00
+  Processed N=6800 | Walker GCC=1.00
+  Processed N=6950 | Walker GCC=1.00
+  Processed N=7100 | Walker GCC=1.00
+  Processed N=7250 | Walker GCC=1.00
+  Processed N=7400 | Walker GCC=1.00
+  Processed N=7550 | Walker GCC=1.00
+  Processed N=7700 | Walker GCC=1.00
+  Processed N=7850 | Walker GCC=1.00
+  Processed N=8000 | Walker GCC=1.00
+  Processed N=8150 | Walker GCC=1.00
+  Processed N=8300 | Walker GCC=1.00
+  Processed N=8450 | Walker GCC=1.00
+  Processed N=8600 | Walker GCC=1.00
+  Processed N=8750 | Walker GCC=1.00
+  Processed N=8900 | Walker GCC=1.00
+  Processed N=9050 | Walker GCC=1.00
+  Processed N=9200 | Walker GCC=1.00
+  Processed N=9350 | Walker GCC=1.00
+  Processed N=9500 | Walker GCC=1.00
+  Processed N=9650 | Walker GCC=1.00
+  Processed N=9800 | Walker GCC=1.00
+  Processed N=9950 | Walker GCC=1.00
+Running Kessler Syndrome...
+  Config: 10000 Sats, 100 Planes, D_max=1000.0km
+  Attack f=0.03 | Walker(Plane)=0.97 | Walker(Rand)=0.97
+  Attack f=0.00 | Walker(Plane)=1.00 | Walker(Rand)=1.00
+  Attack f=0.26 | Walker(Plane)=0.64 | Walker(Rand)=0.72
+  Attack f=0.16 | Walker(Plane)=0.82 | Walker(Rand)=0.83
+  Attack f=0.29 | Walker(Plane)=0.25 | Walker(Rand)=0.66
+  Attack f=0.23 | Walker(Plane)=0.71 | Walker(Rand)=0.76
+  Attack f=0.20 | Walker(Plane)=0.77 | Walker(Rand)=0.80
+  Attack f=0.13 | Walker(Plane)=0.86 | Walker(Rand)=0.87
+  Attack f=0.10 | Walker(Plane)=0.91 | Walker(Rand)=0.90
+  Attack f=0.07 | Walker(Plane)=0.94 | Walker(Rand)=0.93
+  Attack f=0.39 | Walker(Plane)=0.05 | Walker(Rand)=0.07
+  Attack f=0.36 | Walker(Plane)=0.07 | Walker(Rand)=0.37
+  Attack f=0.33 | Walker(Plane)=0.19 | Walker(Rand)=0.56
+  Attack f=0.43 | Walker(Plane)=0.03 | Walker(Rand)=0.05
+  Attack f=0.52 | Walker(Plane)=0.01 | Walker(Rand)=0.01
+  Attack f=0.49 | Walker(Plane)=0.01 | Walker(Rand)=0.01
+  Attack f=0.46 | Walker(Plane)=0.08 | Walker(Rand)=0.02
+  Attack f=0.56 | Walker(Plane)=0.01 | Walker(Rand)=0.00
+  Attack f=0.72 | Walker(Plane)=0.00 | Walker(Rand)=0.00
+  Attack f=0.59 | Walker(Plane)=0.01 | Walker(Rand)=0.01
+  Attack f=0.62 | Walker(Plane)=0.01 | Walker(Rand)=0.00
+  Attack f=0.66 | Walker(Plane)=0.00 | Walker(Rand)=0.00
+  Attack f=0.69 | Walker(Plane)=0.00 | Walker(Rand)=0.00
+  Attack f=0.75 | Walker(Plane)=0.00 | Walker(Rand)=0.00
+  Attack f=0.79 | Walker(Plane)=0.00 | Walker(Rand)=0.00
+  Attack f=0.82 | Walker(Plane)=0.00 | Walker(Rand)=0.00
+  Attack f=0.92 | Walker(Plane)=0.00 | Walker(Rand)=0.00
+  Attack f=0.88 | Walker(Plane)=0.00 | Walker(Rand)=0.00
+  Attack f=0.85 | Walker(Plane)=0.00 | Walker(Rand)=0.00
+  Attack f=0.95 | Walker(Plane)=0.00 | Walker(Rand)=0.00
+
+Total Runtime: 81.8s
+================================================================================
+Plot saved to: C:\Coding\aero\Results\results_plot_20260126_171627.png
+
+================================================================================
+Simulation Complete!
+All results saved to: C:\Coding\aero\Results
+================================================================================
