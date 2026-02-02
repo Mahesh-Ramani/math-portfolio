@@ -25,7 +25,7 @@ from scipy.stats import t
 plt.style.use('seaborn-v0_8-whitegrid')
 
 # output
-OUTPUT_DIR = r"C:\Coding\aero\results"
+OUTPUT_DIR = "your results dir"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
